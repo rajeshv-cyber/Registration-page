@@ -1,0 +1,207 @@
+[
+  {
+    "urls": [
+
+      "https://www.iarfconference.com/conf/registration.php?id=100640801",
+      "https://www.snrischolars.com/event/registration.php?id=100293959",
+      "https://worldacademics.net/event/registration.php?id=100199434",
+      "https://scholarsforum.net/event/registration.php?id=100233133",
+      "https://apste.net/conf/registration.php?id=100158918",
+      "https://iser.org.in/conf/registration.php?id=100648877",
+      "https://www.aspher.net/conf/registration.php?id=100786632",
+      "https://www.sfe.net.in/conf/registration-fee.php?id=101019773",
+      "https://issersociety.com/conf/registration.php?id=100325483",
+      "https://iaarresearch.com/conf/registration.php?id=100741084",
+      "https://researchfoundation.net/event/registration.php?id=100708506",
+      "https://scienceleagues.com/events/registration.php?id=100569454",
+      "https://researchplus.co/event/registration.php?id=100333401",
+      "https://iirdglobal.com/events/registration.php?id=100316468",
+      "https://www.sciencecite.com/event/registration.php?id=100286719",
+      "https://after.org.in/event/registration.php?id=100481803",
+      "https://asar.net.in/event/registration.php?id=100635738",
+      "https://igaeglobal.com/conf/registration.php?id=100262071",
+      "https://efstm.com/event/registration.php?id=100307445",
+      "https://www.researchfora.net/event/registration.php?id=100276074",
+      "https://isit.org.in/event/registration.php?id=100272485",
+      "https://sciencenet.co/event/registration.php?id=100341895",
+      "https://researchleagues.com/event/registration.php?id=100762919",
+      "https://isar.org.in/event/registration.php?id=101027883",
+      "https://www.wrfconference.com/event/registration.php?id=100297571",
+      "https://nier.in/conf/fee-details.php?id=101017865",
+      "https://nationalconference.in/event/conference-registration.php?id=101009652"
+    ],
+    "elements": [
+      {
+        "xpath": "//*[@id='confirm']",
+        "action": "click",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "input[type='radio'][value='USD 429']",
+          "input[name='group100'][type='radio'][value='USD 389']",
+          "//input[@name='group100' and contains(@value,'USD 449')]",
+          "//td[contains(normalize-space(.),'449')]//input[@type='radio' and @name='group100']",
+          "//td[.//i[contains(@class,'fa-usd')]]//input[@type='radio' and @name='group100']",
+          "//input[@name='group100' and contains(@value,'USD 439')]",
+          "//input[@type='radio' and @name='group100' and @value='USD 439']",
+          "//input[@type='radio' and @name='group100' and contains(normalize-space(@value),'USD 449')]",
+          "//input[@type='radio' and @name='group100' and normalize-space(@value)='USD 439']",
+          "//input[@name='group100' and contains(@value,'USD 401')]",
+          "//input[@type='radio' and @name='group100' and not(@disabled)]",
+          "//input[@name='group100' and contains(@value,'INR 4500')]",
+          "//input[@name='group100' and contains(@value,'INR 5000')]",
+          "input[name='group100'][type='radio'][value='USD 409']",
+          "input[name='group100'][type='radio'][value='USD 429']",
+          "input[name='group100'][type='radio'][value='USD 449']",
+          "input[name='group100'][type='radio'][value='USD 479']",
+          "input[name='group100'][type='radio'][value='USD 401']",
+          "input[name='group100'][type='radio'][value='USD 439']",
+          "input[name='group100'][type='radio'][value='USD 419']",
+          "input[name='group100'][type='radio'][value='USD 499']",
+          "input[name='group100'][type='radio'][value='USD 430']",
+          "input[name='group100'][type='radio'][value='INR 5500']",
+          "input[name='group100'][type='radio'][value='INR 4500']",
+          "input[type='radio'][data-category='Live Onsite Presentation']",
+          "input[type='radio'][data-category*='Presentation']"
+        ],
+        "action": "check",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//a[contains(text(),'Online Payment')]",
+          "//a[@onclick='myFunction()']",
+          "//a[contains(@class,'btn-submit')]",
+          "//a[contains(text(),'Payment')]",
+          "//a[@href='#' and contains(@class,'btn')]",
+          "//*[@id='reg_form']/div/div[2]/div/div[4]/div[2]/input",
+          "#paymentLink",
+          "//button[.//span[text()='Make Payment']]",
+          "//*[@id='onlinepayment']",
+          "//*[@id='blockSeatBtn']/span/span[1]",
+          "//*[@id='blockSeatBtn']",
+          "//*[@id='paymentLink']/button",
+          "//*[@id='rzp-button1']/button",
+          "//*[@id='payment']",
+          "//*[@id='paymentLink']",
+          "//*[@id='onlinepay']",
+          "//*[@id='rzp-button1']"
+        ],
+        "action": "click",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//input[@type='text' and contains(@name,'billing')]",
+          "//input[@name='billing_name']",
+          "//input[name='billing_name']",
+          "//input[@id='reg_name']",
+          "//input[contains(@placeholder,'Name')]",
+          "input[name='billing_name']",
+          "input[name='name']",
+          "input[name='fullname']",
+          "input[id='name']",
+          "input[id='fullname']",
+          "input[placeholder*='Name']",
+          "//label[contains(text(),'Name')]/following::input[1]",
+          "//input[@type='text' and @name='billing_name']",
+          "//input[contains(@name,'billing_name')]",
+          "//form[contains(@id,'reg') or contains(@name,'reg')]"                      
+
+
+
+        ],
+        "value": "Rajesh",
+        "action": "fill"
+      },
+      {
+        "xpath": [
+          "//*[@id='email']",
+          "//input[@type='email']",
+          "//input[@name='email']",
+          "//input[contains(@placeholder,'Email')]"
+        ],
+        "value": "rajesh.v@technoarete.org",
+        "action": "fill"
+      },
+      {
+        "xpath": [
+          "//*[@id='phone']",
+          "//input[contains(@name,'phone')]",
+          "//input[contains(@placeholder,'Phone')]"
+        ],
+        "value": "8508109161",
+        "action": "fill"
+      },
+      {
+        "xpath": [
+          "//*[@id='city']",
+          "//input[contains(@name,'city')]",
+          "//input[contains(@name,'billing_city')]"
+
+        ],
+        "value": "Chennai",
+        "action": "fill"
+      },
+      {
+        "xpath": [
+          "//*[@id='State']",
+          "//input[contains(@name,'state')]"
+        ],
+        "value": "Tamil Nadu",
+        "action": "fill"
+      },
+      {
+        "xpath": [
+          "//*[@id='Country']",
+          "//select[contains(@name,'country')]"
+        ],
+        "value": "India",
+        "action": "select"
+      },
+      {
+        "xpath": [
+          "//*[@id='code']",
+          "//input[contains(@name,'zip')]"
+        ],
+        "value": "600053",
+        "action": "fill",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//*[@id='autocomplete']"
+        ],
+        "value": "Chennai 600053",
+        "action": "fill",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//*[@id='couponcode']"
+        ],
+        "value": "987",
+        "action": "fill",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//*[@id='condition']",
+          "//input[@type='checkbox']"
+        ],
+        "action": "check",
+        "optional": true
+      },
+      {
+        "xpath": [
+          "//*[@id='reg_form']/div/div[2]/div/div[14]/button",
+          "//*[@id='reg_form']/div/div[2]/div/div[13]/button",
+          "//*[@id='reg_form']/div/div[2]/div/div[12]/button",
+          "//*[@id='reg_form']/div/div[2]/div/div[13]/div[2]/button"
+        ],
+        "action": "click"
+      }
+    ]
+  }
+]
