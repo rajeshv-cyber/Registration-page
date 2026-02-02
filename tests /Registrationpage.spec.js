@@ -2,74 +2,73 @@ import { test } from '@playwright/test';
 import fs from 'fs';
 import nodemailer from 'nodemailer';
 
-test.setTimeout(0); // 🔥 NO TIMEOUT AT ALL
+/* ================== GLOBAL SETTINGS ================== */
+test.setTimeout(0); //  NO TIMEOUT AT ALL
 
-const SLACK_WEBHOOK_URL =
-  'rajesh';
-
+/* ================== LOAD CONFIG ================== */
 const config = JSON.parse(
   fs.readFileSync('./RegistrationConf.json', 'utf-8')
 );
 
-/* ================== HELPER ================== */
+/* ================== HELPER FUNCTION ================== */
 async function performAction(page, step) {
   const { xpath, action, value, optional } = step;
   if (!action || !xpath) return;
 
-  const selectors = Array.isArray(xpath) ? xpath : [xpath];
+  const xpaths = Array.isArray(xpath) ? xpath : [xpath];
 
-  for (const sel of selectors) {
-    const locator = sel.startsWith('//')
-      ? page.locator(`xpath=${sel}`)
-      : page.locator(sel);
+  for (const xp of xpaths) {
+    const locator = xp.startsWith('//')
+      ? page.locator(`xpath=${xp}`)
+      : page.locator(xp);
 
     try {
-      await locator.first().waitFor({
+      await locator.waitFor({
         state: 'attached',
-        timeout: optional ? 2000 : 5000
+        timeout: optional ? 3000 : 10000
       });
 
       if (action !== 'check') {
-        await locator.first().waitFor({
+        await locator.waitFor({
           state: 'visible',
-          timeout: optional ? 2000 : 5000
+          timeout: optional ? 3000 : 10000
         });
       }
 
       switch (action) {
         case 'fill':
-          await locator.first().fill(value);
+          await locator.fill(value);
           break;
         case 'click':
-          await locator.first().click();
+          await locator.click();
           break;
         case 'check':
-          await locator.first().check({ force: true });
+          await locator.check({ force: true });
           break;
         case 'select':
           try {
-            await locator.first().selectOption({ label: value });
+            await locator.selectOption({ label: value });
           } catch {
-            await locator.first().selectOption({ value });
+            await locator.selectOption({ value });
           }
           break;
         case 'upload':
-          await locator.first().setInputFiles(value);
+          await locator.setInputFiles(value);
           break;
       }
 
-      console.log(`✔ ${action.toUpperCase()} → ${sel}`);
+      console.log(` ${action.toUpperCase()} → ${xp}`);
       return;
 
     } catch {
-      // try next selector
+      // try next xpath
     }
   }
 
   if (optional) {
-    console.warn(`⚠️ Skipped optional: ${selectors.join(' | ')}`);
+    console.warn(` Skipped optional step: ${xpaths.join(' | ')}`);
   } else {
-    throw new Error(`Element not found: ${selectors.join(' | ')}`);
+    throw new Error(`Element not found: ${xpaths.join(' | ')}`);
   }
 }
 
@@ -88,29 +87,25 @@ test('WRF conference registration (JSON driven)', async ({ browser }) => {
   for (const site of config) {
     for (const url of site.urls) {
 
-      console.log(`\n▶ Processing URL: ${url}`);
+      console.log(`\n Processing URL: ${url}`);
       const page = await context.newPage();
 
       try {
-        // ✅ SAFE PAGE LOAD (NO FAIL)
         await page.goto(url, {
           waitUntil: 'domcontentloaded',
-          timeout: 0
+          timeout: 120000
         });
-
-        // small breathing delay for heavy JS sites
-        await page.waitForTimeout(2000);
 
         for (const step of site.elements) {
           await performAction(page, step);
         }
 
+        console.log(`✔ Finished: ${url}`);
         passed++;
         passedList.push(url);
-        console.log(` Finished: ${url}`);
 
       } catch (err) {
-        console.error(` Error on ${url}: ${err.message}`);
+        console.error(`✘ Error on ${url}: ${err.message}`);
         failed++;
         failedList.push(`${url} → ${err.message}`);
 
@@ -121,20 +116,7 @@ test('WRF conference registration (JSON driven)', async ({ browser }) => {
     }
   }
 
-  /* ================== REPORT ================== */
-  const reportText = `
-Total Sites : ${passed + failed}
-Passed      : ${passed}
-Failed      : ${failed}
-
-PASSED:
-${passedList.join('\n') || 'None'}
-
-FAILED:
-${failedList.join('\n') || 'None'}
-`;
-
-  /* ================== EMAIL ================== */
+  /* ================== EMAIL REPORT ================== */
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -146,31 +128,26 @@ ${failedList.join('\n') || 'None'}
 
     await transporter.sendMail({
       from: `"WWC Registration Automation" <${process.env.GMAIL_USER}>`,
-      to: 'rajesh.v@technoarete.org',
+      to: 'rajesh.v@technoarete.org,nileshkumar@technoarete.org',
       subject: 'WWC Automation Registration Page Report',
-      text: reportText
+      text: `
+Total Sites : ${passed + failed}
+Passed      : ${passed}
+Failed      : ${failed}
+
+PASSED:
+${passedList.join('\n') || 'None'}
+
+FAILED:
+${failedList.join('\n') || 'None'}
+`
     });
 
-    console.log('📧 Email sent');
-  } catch (e) {
-    console.error(`📧 Email failed: ${e.message}`);
-  }
+    console.log('📧 Email sent successfully');
 
-  /* ================== SLACK ================== */
-  try {
-    await fetch(SLACK_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text: `*WWC Automation Registration Page Report*\n\`\`\`${reportText}\`\`\``
-      })
-    });
-
-    console.log('💬 Slack sent');
-  } catch (e) {
-    console.error(`💬 Slack failed: ${e.message}`);
+  } catch (emailErr) {
+    console.error(` Email failed: ${emailErr.message}`);
   }
 
   try { await context.close(); } catch {}
 });
-
