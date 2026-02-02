@@ -1,4 +1,4 @@
-name: Daily WRF Automation Run
+name: Daily WWC Automation Registration page
 
 on:
   schedule:
