@@ -5,10 +5,10 @@ import nodemailer from 'nodemailer';
 test.setTimeout(0); // 🔥 NO TIMEOUT AT ALL
 
 const SLACK_WEBHOOK_URL =
-  'https://hooks.slack.com/services/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';
+  'rajesh';
 
 const config = JSON.parse(
-  fs.readFileSync('./Sampletest.json', 'utf-8')
+  fs.readFileSync('./RegistrationConf.json', 'utf-8')
 );
 
 /* ================== HELPER ================== */
